@@ -19,7 +19,7 @@ function App() {
   const progressCircle = React.useRef<SVGSVGElement>(null);
   const progressContent = React.useRef<HTMLSpanElement>(null);
 
-  const onAutoplayTimeLeft = (swiper: any, time: number, progress: number) => {
+  const onAutoplayTimeLeft = (_swiper: any, time: number, progress: number) => {
     progressCircle.current?.style?.setProperty(
       "--progress",
       String(1 - progress)
