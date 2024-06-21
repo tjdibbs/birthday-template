@@ -11,7 +11,7 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 // import required modules
 import { Autoplay, Mousewheel, Navigation } from "swiper/modules";
-import { Button, Modal, Popover } from "antd";
+import { Button, Popover } from "antd";
 import { UpIcon, UserTie } from "./assets/icons";
 import { AnimatePresence, motion } from "framer-motion";
 
