@@ -10,14 +10,8 @@ import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 // import required modules
-import {
-  Autoplay,
-  EffectCube,
-  Mousewheel,
-  Navigation,
-  Pagination,
-} from "swiper/modules";
-import { Button, Popover, Tooltip } from "antd";
+import { Autoplay, Mousewheel, Navigation } from "swiper/modules";
+import { Button, Popover } from "antd";
 import { UpIcon, UserTie } from "./assets/icons";
 
 function App() {
