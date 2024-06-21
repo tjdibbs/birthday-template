@@ -1,0 +1,1 @@
+git push github --all && git push gitlab --all && git push tjdibbs --all
