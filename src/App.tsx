@@ -11,7 +11,7 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 // import required modules
 import { Autoplay, Mousewheel, Navigation } from "swiper/modules";
-import { Button, Popover } from "antd";
+import { Avatar, Button, Popover } from "antd";
 import { UpIcon, UserTie } from "./assets/icons";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -83,21 +83,26 @@ function App() {
   }, [open]);
 
   return (
-    <div id="container" className="w-screen h-screen relative">
+    <div id="container" className="w-screen h-screen overflow-hidden relative">
       <AnimatePresence>
         {!open && (
           <motion.div
             exit={{ opacity: 0 }}
-            className="fixed bg-white left-0 h-screen w-screen top-0 z-[1000] grid place-items-center"
+            className="fixed bg-white left-0 h-screen w-screen top-0 z-[1000] grid place-items-center place-content-center gap-4"
           >
+            <Avatar size={100} src="/images/image1.jpg" />
+            <p className="text-black font-black">OLUWANISHOLA AYEOTAN </p>
+            <div className="text-gray-600 font-bold">Happy Birthday </div>
+
             <Button
-              className=" py-0 font-bold"
+              className=" py-0 font-bold "
+              type="primary"
               onClick={() => {
                 setOpen(true);
                 audioRef.current?.play();
               }}
             >
-              View
+              Open View
             </Button>
           </motion.div>
         )}
@@ -116,7 +121,7 @@ function App() {
         <Button
           shape="circle"
           size="large"
-          className="grid place-items-center fixed top-5 left-5  z-[100]"
+          className="grid place-items-center bg-transparent fixed top-1 left-5  z-[100]"
           icon={<UserTie color="white" />}
         />
       </Popover>
@@ -186,8 +191,8 @@ function App() {
           ></audio>
         </div>
 
-        <div className="z-50 max-w-[600px] mx-auto p-4 fixed top-0 left-1/2 -translate-x-1/2 h-screen w-screen flex-col flex">
-          <div className="text-xl sm:text-lg md:text-2xl text-center font-black mb-4">
+        <div className="z-50 no-scrollbar max-w-[600px] mx-auto p-4 fixed top-0 left-1/2 -translate-x-1/2 h-full overflow-auto w-screen flex-col flex">
+          <div className="text-xl sm:text-lg md:text-2xl text-center font-black mb-4 mt-2">
             Happy Birthday!
           </div>
 
@@ -211,20 +216,20 @@ function App() {
             // pagination={true}
             onAutoplayTimeLeft={onAutoplayTimeLeft}
             modules={[Autoplay, Mousewheel, Navigation]}
-            className="mySwiper  flex-1 flex-grow m-0"
+            className="mySwiper min-h-[70vh]  m-0"
           >
             {Array.from(new Array(8)).map((_, i) => {
               return (
                 <SwiperSlide
                   key={i}
-                  className=" h-full flex items-center justify-center "
+                  className=" flex h-full items-center justify-center "
                 >
                   <div
                     key={i}
-                    className="image-wrap  relative bg-white w-max max-w-full h-full border-[10px] rounded-3xl overflow-hidden border-solid"
+                    className="image-wrap h-full relative bg-white w-max max-w-full border-[10px] rounded-3xl overflow-hidden border-solid"
                   >
                     <img
-                      className="h-full w-auto object-cover"
+                      className="h-full max-w-full w-[600px] object-cover"
                       src={`/images/image${i + 1}.jpg`}
                     />
                   </div>
@@ -240,12 +245,12 @@ function App() {
             <Button
               icon={<UpIcon color="#fff" />}
               shape="circle"
-              className="next text-white grid place-items-center p-0"
+              className="next text-white bg-transparent grid place-items-center p-0"
             />
             <Button
               icon={<UpIcon color="#fff" className="rotate-180" />}
               shape="circle"
-              className="prev grid place-items-center p-0"
+              className="prev grid place-items-center bg-transparent p-0"
             />
             <div className="autoplay-progress relative h-10 w-10 flex items-center justify-center font-bold text-white">
               <svg viewBox="0 0 48 48" ref={progressCircle}>
