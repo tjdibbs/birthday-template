@@ -82,6 +82,10 @@ function App() {
     }
   }, [open]);
 
+  const data = Array.from(new Array(9))
+    .map((_, i) => [`image${i + 1}.jpg`, `video${i + 1}.mp4`])
+    .flat();
+
   return (
     <div id="container" className="w-screen h-screen overflow-hidden relative">
       <AnimatePresence>
@@ -90,8 +94,8 @@ function App() {
             exit={{ opacity: 0 }}
             className="fixed bg-white left-0 h-screen w-screen top-0 z-[1000] grid place-items-center place-content-center gap-4"
           >
-            <Avatar size={100} src="/images/image1.jpg" />
-            <p className="text-black font-black">OLUWANISHOLA AYEOTAN </p>
+            <Avatar size={100} src="/images/image3.jpg" />
+            <p className="text-black font-black">Omowonula Adesoro </p>
             <div className="text-gray-600 font-bold">Happy Birthday </div>
 
             <Button
@@ -134,45 +138,52 @@ function App() {
         {/* <ThemeController />
          */}
         <div className="wrapper relative w-full h-full flex flex-col z-10">
-          {/* <div className="card bg-white/70 shadow-2xl shadow-white/20 p-10 rounded-xl">
-          <div className="image bg-white shadow-lg rounded-full p-2">
-            <img src="/images/cake.png" alt="cake" className="rounded-full" />
-          </div>
-          <div className="hub-members"></div>
-          <div className="social">
-            <div className="socail-icons flex gap-3 my-10 justify-center">
-              {socialLinks.map((social) => (
-                <a
-                  href={social.link}
-                  className="icon-wrap bg-white rounded-xl p-1 shadow-lg"
-                  title={social.label}
-                >
-                  <Icon icon={social.icon} height={24} color="grey" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div> */}
           <Marquee direction="left">
-            {Array.from(new Array(8)).map((_, i) => {
+            {data.map((path, i) => {
+              const isImage = path.includes("image");
+              const src = isImage ? "/images/" + path : "/videos/" + path;
               return (
                 <div key={i} className="image-wrap h-[50vh]">
-                  <img
-                    className="h-full brightness-[10%] object-contain"
-                    src={`/images/image${i + 1}.jpg`}
-                  />
+                  {isImage ? (
+                    <img
+                      className="h-full brightness-[10%] object-contain"
+                      src={src}
+                    />
+                  ) : (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      controls
+                      className="h-full brightness-[10%] object-cover"
+                      src={src}
+                    />
+                  )}
                 </div>
               );
             })}
           </Marquee>
           <Marquee direction="right">
-            {Array.from(new Array(8)).map((_, i) => {
+            {data.map((path, i) => {
+              const isImage = path.includes("image");
+              const src = isImage ? "/images/" + path : "/videos/" + path;
               return (
                 <div key={i} className="image-wrap h-[50vh]">
-                  <img
-                    className="h-full brightness-[10%] object-contain"
-                    src={`/images/image${i + 1}.jpg`}
-                  />
+                  {isImage ? (
+                    <img
+                      className="h-full brightness-[10%] object-contain"
+                      src={src}
+                    />
+                  ) : (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      controls
+                      className="h-full brightness-[10%] object-cover"
+                      src={src}
+                    />
+                  )}
                 </div>
               );
             })}
@@ -209,7 +220,7 @@ function App() {
             // }}
             loop
             autoplay={{
-              delay: 5000,
+              delay: 10000,
               disableOnInteraction: false,
             }}
             navigation={{ enabled: true, prevEl: ".prev", nextEl: ".next" }}
@@ -218,7 +229,9 @@ function App() {
             modules={[Autoplay, Mousewheel, Navigation]}
             className="mySwiper min-h-[70vh]  m-0"
           >
-            {Array.from(new Array(8)).map((_, i) => {
+            {data.map((path, i) => {
+              const isImage = path.includes("image");
+              const src = isImage ? "/images/" + path : "/videos/" + path;
               return (
                 <SwiperSlide
                   key={i}
@@ -228,14 +241,47 @@ function App() {
                     key={i}
                     className="image-wrap h-full relative bg-white w-max max-w-full border-[10px] rounded-3xl overflow-hidden border-solid"
                   >
-                    <img
-                      className="h-full max-w-full w-[600px] object-cover"
-                      src={`/images/image${i + 1}.jpg`}
-                    />
+                    {isImage ? (
+                      <img
+                        className="h-full max-w-full w-[600px] object-cover"
+                        src={src}
+                      />
+                    ) : (
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        controls
+                        className="h-full max-w-full w-[600px] object-cover"
+                        src={src}
+                      />
+                    )}
                   </div>
                 </SwiperSlide>
               );
             })}
+            {/* {Array.from(new Array(9)).map((_, i) => {
+              return (
+                <SwiperSlide
+                  key={i}
+                  className=" flex h-full items-center justify-center "
+                >
+                  <div
+                    key={i}
+                    className="image-wrap h-full relative bg-white w-max max-w-full border-[10px] rounded-3xl overflow-hidden border-solid"
+                  >
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      controls
+                      className="h-full max-w-full w-[600px] object-cover"
+                      src={`/videos/video${i + 1}.mp4`}
+                    />
+                  </div>
+                </SwiperSlide>
+              );
+            })} */}
           </Swiper>
           <div
             className="z-50 overflow-hidden pointer-events-none absolute top-0 left-0 h-full w-full"
@@ -260,19 +306,16 @@ function App() {
             </div>
           </div>
           <div className=" z-50 py-4 sm:px-4 w-full text-left text-xs sm:text-sm md:text-base  bg-black/30 text-white">
-            Happy birthday to the most amazing brother in the world!
-            OLUWANISHOLA AYEOTAN ❤‍🩹 Today marks a special day, a day to
-            celebrate you and all the incredible qualities that makes you who
-            you are🫡 I want to take a moment to express how grateful I am to
-            have you as my brother. Your kindness, empathy, and sense of humor
-            inspire me every day. Your unwavering support and guidance have
-            helped shape me into the person I am today, and for that, I am
-            forever thankful🙏🏿 On your special day, I wish for you to be
-            surrounded by love, laughter, and all your favorite things. May your
-            birthday be a reminder of how much you're appreciated, admired, and
-            cherished💟🫶 Here's to another incredible year of adventures,
-            growth, and making more unforgettable memories! I love you, bro, and
-            happy birthday once again🎉❤‍🩹
+            Happy birthday to the most amazing person, Omowonuola Adesoro! 🎉❤️
+            Today is a special day, a day to celebrate you and all the
+            incredible qualities that make you who you are. 🫡 I want to take a
+            moment to express how grateful I am to have you in my life. Your
+            kindness, empathy, and sense of humor inspire me. 🙏🏿 On your special
+            day, I wish for you to be surrounded by love, laughter, and all your
+            favorite things. May your birthday be a reminder of how much you're
+            appreciated, admired, and cherished. 💟🫶 Here's to another
+            incredible year of adventures, growth, and making more unforgettable
+            memories! Happy birthday once again, Ayomi! 🎉❤️ I love you Ayomi ❤️
           </div>
         </div>
       </motion.div>
