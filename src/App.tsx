@@ -90,7 +90,7 @@ function App() {
         .then(() => {
           // Automatic playback started!
         })
-        .catch((error) => {
+        .catch(() => {
           // Auto-play was prevented
           // Show a UI element to let the user manually start playback
         });
