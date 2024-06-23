@@ -82,6 +82,21 @@ function App() {
     }
   }, [open]);
 
+  const handleVideoPlay = (video: HTMLVideoElement) => {
+    video.muted = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Automatic playback started!
+        })
+        .catch((error) => {
+          // Auto-play was prevented
+          // Show a UI element to let the user manually start playback
+        });
+    }
+  };
+
   const data = Array.from(new Array(9))
     .map((_, i) => [`image${i + 1}.jpg`, `video${i + 1}.mp4`])
     .flat();
@@ -182,6 +197,9 @@ function App() {
                       controls
                       className="h-full brightness-[10%] object-cover"
                       src={src}
+                      onLoadedData={(e) =>
+                        handleVideoPlay(e.target as HTMLVideoElement)
+                      }
                     />
                   )}
                 </div>
